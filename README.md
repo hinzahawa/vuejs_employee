@@ -1,8 +1,8 @@
 # vuejs_employee
-vue
+front vuejs
 - npm i 
 - yarn serve
 
-api
+express api
 - npm i
 - npm run dev
