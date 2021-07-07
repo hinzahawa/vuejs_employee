@@ -10,23 +10,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(e) in dataEmployee" :key="e.id">
-          <td>{{e.id}}</td>
-          <td v-if="checkEditMode === e.id">
+        <tr v-for="(e,idx) in dataEmployee" :key="e._id">
+          <td>{{idx+1}}</td>
+          <td v-if="checkEditMode === e._id">
             <input type="text" v-model="e.name">
           </td>
           <td v-else>{{e.name}}</td>
-          <td v-if="checkEditMode === e.id">
+          <td v-if="checkEditMode === e._id">
             <input type="text" v-model="e.email">
           </td>
           <td v-else>{{e.email}}</td>
-          <td v-if="checkEditMode === e.id">
+          <td v-if="checkEditMode === e._id">
             <button @click="edit(e)">Save</button>
             <button @click="cancel(e)">Cancel</button>
           </td>
           <td v-else>
             <button @click="editMode(e)">Edit</button>
-            <button @click="deleteUser(e.id)">Delete</button>
+            <button @click="deleteUser(e._id)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -46,12 +46,12 @@ export default {
   },
   data() {
     return {
-      checkEditMode: null,
+      checkEditMode: null
     }
   },
   methods:{
     editMode(data){
-      this.checkEditMode = data.id
+      this.checkEditMode = data._id
     },
     edit(data){
       this.$store.dispatch("EditDataEmployee", data);
@@ -69,8 +69,10 @@ export default {
     dataEmployee(){
       return this.$store.getters.getDataEmployee
     }
+  },
+  created(){
+    this.$store.dispatch("getDataEmployee");
   }
-  
 };
 </script>
 

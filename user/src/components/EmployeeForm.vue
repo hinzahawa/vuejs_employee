@@ -30,9 +30,10 @@ export default {
   },
   methods: {
     handleSubmit() {
-      const id = this.$store.getters.getDataEmployee[this.$store.getters.getDataEmployee.length-1].id+1
-      const data = {...this.dataUser, id}
-      this.$store.dispatch("setDataEmployee", data);
+      // const id = this.$store.getters.getDataEmployee[this.$store.getters.getDataEmployee.length-1].id+1
+      // const data = {...this.dataUser, _id}
+      this.$store.dispatch("setDataEmployee", this.dataUser);
+      
     },
   },
 };
