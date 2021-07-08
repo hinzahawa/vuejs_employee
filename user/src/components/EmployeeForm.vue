@@ -33,7 +33,8 @@ export default {
       // const id = this.$store.getters.getDataEmployee[this.$store.getters.getDataEmployee.length-1].id+1
       // const data = {...this.dataUser, _id}
       this.$store.dispatch("setDataEmployee", this.dataUser);
-      
+      this.dataUser.email =''
+      this.dataUser.name =''
     },
   },
 };

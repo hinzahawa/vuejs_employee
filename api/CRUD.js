@@ -65,8 +65,9 @@ const update = async (id, email, name) => {
         return reject(err);
       }
       var dbo = db.db("warehouse");
-      let find = { _id: ObjectId(id) };
-      dbo.collection("employee").updateOne(find, function (err, res) {
+      const query = { $set: { email:email , name:name}}
+      const find = { _id: ObjectId(id) };
+      dbo.collection("employee").updateOne(find,query, function (err, res) {
         if (err) throw err;
         console.log("update document");
         db.close();

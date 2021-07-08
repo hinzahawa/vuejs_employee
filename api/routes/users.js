@@ -22,10 +22,12 @@ router.post("/insert", async function (req, res) {
   const { email, name } = req.body;
   try {
     const data = await insert(email, name);
+    const getDataEmployee = await getData();
     data.hasOwnProperty("n") && data.n === 1
       ? res.send({
           status: "success",
           message: "insert sucessfully.",
+          data: getDataEmployee
         })
       : res.status(400).json({ status: "error", message: "insert error." });
   } catch (error) {
@@ -51,8 +53,8 @@ router.put("/update", async function (req, res) {
   }
 });
 
-router.delete("/delete", async function (req, res) {
-  const { id } = req.body;
+router.delete("/delete/:id", async function (req, res) {
+  const { id } = req.params;
   try {
     const data = await deleteData(id);
     data.hasOwnProperty("n") && data.n === 1

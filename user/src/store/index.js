@@ -28,14 +28,14 @@ export default new Vuex.Store({
     deleteDataEmployee(state, payload) {
       state.dataEmployee = state.dataEmployee.filter((v) => v._id !== payload);
     },
-    getDataEmployee(state,payload) {
+    getDataEmployee(state, payload) {
       state.dataEmployee = payload;
     },
   },
   actions: {
     setDataEmployee({ commit }, data) {
-      const {email,name} = data
-      ApiService.post("users/insert",{email:email,name:name})
+      const { email, name } = data;
+      ApiService.post("users/insert", { email: email, name: name })
         .then(({ data }) => {
           if (data.status === "success") {
             commit("setDataEmployee", data.data);
@@ -47,10 +47,29 @@ export default new Vuex.Store({
         });
     },
     EditDataEmployee({ commit }, data) {
-      commit("updateDataEmployee", data);
+      const { _id,email,name } = data
+      ApiService.put(`users/update`,{ id:_id,email:email,name:name})
+      .then(({ data }) => {
+        if (data.status === "success") {
+          commit("updateDataEmployee", data);
+        }
+      })
+      .catch(({ response }) => {
+        console.log(response);
+        // context.commit(SET_ERROR, response.data.errors);
+      });
     },
-    DeleteDataEmployee({ commit }, data) {
-      commit("deleteDataEmployee", data);
+    DeleteDataEmployee({ commit }, id) {
+      ApiService.delete(`users/delete/${id}`)
+        .then(({ data }) => {
+          if (data.status === "success") {
+            commit("deleteDataEmployee", id);
+          }
+        })
+        .catch(({ response }) => {
+          console.log(response);
+          // context.commit(SET_ERROR, response.data.errors);
+        });
     },
     getDataEmployee({ commit }) {
       ApiService.get("users")
