@@ -1,25 +1,25 @@
 <template>
   <div class="employee-table">
-      <EmployeeForm/>
+    <EmployeeForm />
     <table v-if="dataEmployee.length">
       <thead>
         <tr>
-          <th>no.</th>
+          <th>No.</th>
           <th>Name</th>
           <th>Email</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(e,idx) in dataEmployee" :key="e._id">
-          <td>{{idx+1}}</td>
+        <tr v-for="(e, idx) in dataEmployee" :key="e._id">
+          <td>{{ idx + 1 }}</td>
           <td v-if="checkEditMode === e._id">
-            <input type="text" v-model="e.name">
+            <input type="text" v-model="e.name" />
           </td>
-          <td v-else>{{e.name}}</td>
+          <td v-else>{{ e.name }}</td>
           <td v-if="checkEditMode === e._id">
-            <input type="text" v-model="e.email">
+            <input type="text" v-model="e.email" />
           </td>
-          <td v-else>{{e.email}}</td>
+          <td v-else>{{ e.email }}</td>
           <td v-if="checkEditMode === e._id">
             <button @click="edit(e)">Save</button>
             <button @click="cancel(e)">Cancel</button>
@@ -38,41 +38,40 @@
 <script>
 import EmployeeForm from "./EmployeeForm.vue";
 
-
 export default {
-  name: 'EmployeeTable',
+  name: "EmployeeTable",
   components: {
-    EmployeeForm
+    EmployeeForm,
   },
   data() {
     return {
-      checkEditMode: null
-    }
+      checkEditMode: null,
+    };
   },
-  methods:{
-    editMode(data){
-      this.checkEditMode = data._id
+  methods: {
+    editMode(data) {
+      this.checkEditMode = data._id;
     },
-    edit(data){
+    edit(data) {
       this.$store.dispatch("EditDataEmployee", data);
-      this.checkEditMode = null
+      this.checkEditMode = null;
     },
-    deleteUser(id){
-       this.$store.dispatch("DeleteDataEmployee", id);
+    deleteUser(id) {
+      this.$store.dispatch("DeleteDataEmployee", id);
     },
-    cancel(){
-      this.$store.getters.getDataEmployee
-      this.checkEditMode = null
-    }
+    cancel() {
+      this.$store.getters.getDataEmployee;
+      this.checkEditMode = null;
+    },
   },
-  computed:{
-    dataEmployee(){
-      return this.$store.getters.getDataEmployee
-    }
+  computed: {
+    dataEmployee() {
+      return this.$store.getters.getDataEmployee;
+    },
   },
-  created(){
+  created() {
     this.$store.dispatch("getDataEmployee");
-  }
+  },
 };
 </script>
 
@@ -83,29 +82,34 @@ table {
   width: 100%;
 }
 
-table td, #table th {
+table td,
+#table th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-table tr:nth-child(even){background-color: #f2f2f2;}
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-table tr:hover {background-color: #ddd;}
+table tr:hover {
+  background-color: #ddd;
+}
 
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
 }
-.empty-table{
+.empty-table {
   font-weight: bold;
   font-size: 1.3rem;
   background-color: coral;
 }
 
-td{
+td {
   text-align: left;
 }
 </style>

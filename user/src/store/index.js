@@ -47,17 +47,17 @@ export default new Vuex.Store({
         });
     },
     EditDataEmployee({ commit }, data) {
-      const { _id,email,name } = data
-      ApiService.put(`users/update`,{ id:_id,email:email,name:name})
-      .then(({ data }) => {
-        if (data.status === "success") {
-          commit("updateDataEmployee", data);
-        }
-      })
-      .catch(({ response }) => {
-        console.log(response);
-        // context.commit(SET_ERROR, response.data.errors);
-      });
+      const { _id, email, name } = data;
+      ApiService.put(`users/update`, { id: _id, email: email, name: name })
+        .then(({ data }) => {
+          if (data.status === "success") {
+            commit("updateDataEmployee", data);
+          }
+        })
+        .catch(({ response }) => {
+          console.log(response);
+          // context.commit(SET_ERROR, response.data.errors);
+        });
     },
     DeleteDataEmployee({ commit }, id) {
       ApiService.delete(`users/delete/${id}`)
