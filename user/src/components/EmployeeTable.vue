@@ -1,38 +1,52 @@
 <template>
+  <v-app>
   <div class="employee-table">
     <EmployeeForm />
-    <table v-if="dataEmployee.length">
-      <thead>
-        <tr>
-          <th>No.</th>
-          <th>Name</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(e, idx) in dataEmployee" :key="e._id">
-          <td>{{ idx + 1 }}</td>
-          <td v-if="checkEditMode === e._id">
-            <input type="text" v-model="e.name" />
-          </td>
-          <td v-else>{{ e.name }}</td>
-          <td v-if="checkEditMode === e._id">
-            <input type="text" v-model="e.email" />
-          </td>
-          <td v-else>{{ e.email }}</td>
-          <td v-if="checkEditMode === e._id">
-            <button @click="edit(e)">Save</button>
-            <button @click="cancel(e)">Cancel</button>
-          </td>
-          <td v-else>
-            <button @click="editMode(e)">Edit</button>
-            <button @click="deleteUser(e._id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <v-simple-table v-if="dataEmployee.length">
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(e, idx) in dataEmployee" :key="e._id">
+            <td>{{ idx + 1 }}</td>
+            <td v-if="checkEditMode === e._id">
+              <v-text-field
+                placeholder="Placeholder"
+                outlined
+                v-model="e.name"
+              ></v-text-field>
+              <!-- <input type="text" v-model="e.name" /> -->
+            </td>
+            <td v-else>{{ e.name }}</td>
+            <td v-if="checkEditMode === e._id">
+              <v-text-field
+                placeholder="Placeholder"
+                outlined
+                v-model="e.email"
+              ></v-text-field>
+            </td>
+            <td v-else>{{ e.email }}</td>
+            <td v-if="checkEditMode === e._id">
+              <v-btn depressed color="primary" @click="edit(e)">Save</v-btn>
+              <v-btn depressed color="error" @click="cancel()">Cancel</v-btn>
+            </td>
+            <td v-else >
+              <v-btn depressed color="warning" @click="editMode(e)">Edit</v-btn>
+              <v-btn depressed color="error" @click="deleteUser(e._id)">Delete</v-btn>
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+
     <h2 v-else>no data user</h2>
   </div>
+  </v-app>
 </template>
 
 <script>
@@ -111,5 +125,8 @@ table th {
 
 td {
   text-align: left;
+}
+.tools{
+padding-top: 12px;
 }
 </style>
