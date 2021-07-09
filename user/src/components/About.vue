@@ -1,12 +1,12 @@
 <template>
-<v-app>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>This is an about page asd</h1>
     <h2>{{counter}}</h2>
     <br>
-    <button @click="addCount">Chang</button>
-  </div>
-  </v-app>
+    <button @click="add">Change</button>
+    <br>
+    <a v-bind:href="'/about'" >route</a>
+    </div>
 </template>
 
 <script>
@@ -14,13 +14,18 @@ export default {
   name:"about",
   data() {
     return {
-      count:0
+      counter:0
+    }
+  },
+  watch:{
+    counter(newValue,oldValue){
+      console.log('oldValue',oldValue);
+      console.log('newValue',newValue);
     }
   },
   methods:{
-    addCount(){
-      console.log('sdf');
-      this.count++
+    add(){
+      this.counter++
     }
   },
   created(){

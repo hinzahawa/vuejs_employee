@@ -1,17 +1,20 @@
 <template>
 <div>
-  <EmployeeTable />
+  <EmployeeTable/>
+  <!-- <About /> -->
 </div>
 
 </template>
 
 <script>
 import EmployeeTable from "./components/EmployeeTable.vue";
+// import About from './components/About.vue';
 
 export default {
   name: "App",
   components: {
-    EmployeeTable,
+    EmployeeTable
+    // About
   },
   data: () => ({
     //

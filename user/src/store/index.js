@@ -31,6 +31,9 @@ export default new Vuex.Store({
     getDataEmployee(state, payload) {
       state.dataEmployee = payload;
     },
+    clearDataEmployee(state){
+      state.dataEmployee = []
+    }
   },
   actions: {
     setDataEmployee({ commit }, data) {
@@ -83,6 +86,9 @@ export default new Vuex.Store({
           // context.commit(SET_ERROR, response.data.errors);
         });
     },
+    clearDataEmployee({ commit }){
+      commit("clearDataEmployee");
+    }
   },
   modules: {},
   getters: {

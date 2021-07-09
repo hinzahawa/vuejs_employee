@@ -1,6 +1,11 @@
 <template>
   <div class="employee-form">
     <form>
+      <v-text-field
+      v-model="msg"
+      label="msg"
+      required
+    ></v-text-field>
     <v-text-field
       v-model="dataUser.name"
       label="Name"
@@ -25,11 +30,18 @@
 export default {
   data() {
     return {
+      msg :'',
       dataUser: {
         email: "",
         name: "",
       },
     };
+  },
+   watch:{
+    msg(newValue,oldValue){
+      console.log('oldValue',oldValue);
+      console.log('newValue',newValue);
+    }
   },
   methods: {
     handleSubmit() {

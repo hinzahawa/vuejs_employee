@@ -86,6 +86,10 @@ export default {
   created() {
     this.$store.dispatch("getDataEmployee");
   },
+  beforeDestroy(){
+    console.log('beforeDestroy');
+    this.$store.dispatch("clearDataEmployee");
+  }
 };
 </script>
 
